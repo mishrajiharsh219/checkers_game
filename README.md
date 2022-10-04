@@ -4,10 +4,7 @@ Checkers game and AI engine written in Javascript that runs in a browser.
 
 The AI engine, implemented 100% in Javascript, uses techniques from adversarial search to choose the best move against a human opponent.
 
-Game Play
-Start a game
-Navigate to http://checkers-js-ai.s3-website-us-east-1.amazonaws.com/ Click "Start New Game"
-
+PROJECT LIVE DEMO :- https://mishrajiharsh219.github.io/checkers_game/
 Moving Pieces
 Drag a red circle to a target square. If the move is a jump, and a double or triple jump is possible, the computer will automatically complete the jumps for the player.
 
