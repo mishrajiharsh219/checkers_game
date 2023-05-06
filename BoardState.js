@@ -199,18 +199,18 @@ class BoardState {
             return false;
         }
 
-        if (to.x == 0 || to.x == 7) {
+//         if (to.x == 0 || to.x == 7) {
 
-            if (board[from.x][from.y] == red) {
-                board[from.x][from.y] = redKing
-                if (game != null)
-                    game.setKing([from.x, from.y], 1)
-            } else if (board[from.x][from.y] == black) {
-                board[from.x][from.y] = blackKing
-                if (game != null)
-                    game.setKing([from.x, from.y], -1)
-            }
-        }
+//             if (board[from.x][from.y] == red) {
+//                 board[from.x][from.y] = redKing
+//                 if (game != null)
+//                     game.setKing([from.x, from.y], 1)
+//             } else if (board[from.x][from.y] == black) {
+//                 board[from.x][from.y] = blackKing
+//                 if (game != null)
+//                     game.setKing([from.x, from.y], -1)
+//             }
+//         }
 
 
         if (removeMiddlePiece && game != null) {
