@@ -145,79 +145,66 @@ class BoardState {
 
     }
 
-    static isMoveLegal(from, to, game,board) {
-        if ((to.x < 0) || (to.y < 0) || (to.x > 7) || (to.y > 7)) {
-            return false;
-        }
-        let piece = board[to.x][to.y],
-            removeMiddlePiece = false,
-            jumpedPieceIndex;
-
-        var distance = {
-            x: to.x - from.x,
-            y: to.y - from.y
-        };
-        if ((distance.x == 0) || (distance.y == 0)) {
-            //console.log("ILLEGAL MOVE: horizontal or vertical move");
-            return false;
-        }
-        if (Math.abs(distance.x) != Math.abs(distance.y)) {
-            //console.log("ILLEGAL MOVE: non-diagonal move");
-            return false;
-        }
-        if (Math.abs(distance.x) > 2) {
-            //console.log("ILLEGAL MOVE: more than two diagonals");
-            return false;
-        }
-        if (board[to.x][to.y] != 0) {
-            //console.log("ILLEGAL MOVE: cell is not empty");
-            return false;
-        }
-        if (Math.abs(distance.x) == 2) {
-            jumpedPieceIndex = BoardState.getJumpedPiece(from, to);
-            // board[jumpedPieceIndex[0]][jumpedPieceIndex[1]]=0
-            var jumpedPiece = board[jumpedPieceIndex[0]][jumpedPieceIndex[1]]
-
-            if (jumpedPiece == null) {
-                //console.log("ILLEGAL MOVE: no piece to jump");
-                return false;
-            }
-            var pieceState = parseInt(board[from.x][from.y]);
-            var jumpedState = parseInt(jumpedPiece);
-            if (pieceState != -jumpedState) {
-                //console.log("ILLEGAL MOVE: can't jump own piece");
-                return false;
-            }
-            removeMiddlePiece = true;
-        }
-        if ((parseInt(board[from.x][from.y]) === board[from.x][from.y]) && (Math.sign(board[from.x][from.y]) != Math.sign(distance.x))) {
-            //console.log("ILLEGAL MOVE: wrong direction");
-            return false;
-        }
- 
-
-//         if (to.x == 0 || to.x == 7) {
-
-//             if (board[from.x][from.y] == red) {
-//                 board[from.x][from.y] = redKing
-//                 if (game != null)
-//                     game.setKing([from.x, from.y], 1)
-//             } else if (board[from.x][from.y] == black) {
-//                 board[from.x][from.y] = blackKing
-//                 if (game != null)
-//                     game.setKing([from.x, from.y], -1)
-//             }
-//         }
-
-
-        if (removeMiddlePiece && game != null) {
-            // board[jumpedPieceIndex[0]][jumpedPieceIndex[1]]=0
-            game.removeMiddlePiece(jumpedPieceIndex)
-        }
-        // if (game != null)
-        //     this.nextTurn()
-        return true
+   static isMoveLegal(from, to, game, board) {
+    if ((to.x < 0) || (to.y < 0) || (to.x >= BOARDSIZE) || (to.y >= BOARDSIZE)) {
+        window.alert("Invalid move: Target position is outside the board.");
+        return false;
     }
+
+    let piece = board[to.x][to.y],
+        removeMiddlePiece = false,
+        jumpedPieceIndex;
+
+    var distance = {
+        x: to.x - from.x,
+        y: to.y - from.y
+    };
+
+    // Check for invalid moves
+    if ((distance.x === 0) || (distance.y === 0)) {
+        window.alert("Invalid move: Only diagonal moves are allowed.");
+        return false;
+    }
+    if (Math.abs(distance.x) !== Math.abs(distance.y)) {
+        window.alert("Invalid move: Non-diagonal move.");
+        return false;
+    }
+    if (Math.abs(distance.x) > 2) {
+        window.alert("Invalid move: More than two diagonals.");
+        return false;
+    }
+    if (board[to.x][to.y] !== 0) {
+        window.alert("Invalid move: Target position is not empty.");
+        return false;
+    }
+    if (Math.abs(distance.x) === 2) {
+        jumpedPieceIndex = BoardState.getJumpedPiece(from, to);
+        var jumpedPiece = board[jumpedPieceIndex[0]][jumpedPieceIndex[1]];
+
+        if (jumpedPiece == null) {
+            window.alert("Invalid move: No piece to jump.");
+            return false;
+        }
+        var pieceState = parseInt(board[from.x][from.y]);
+        var jumpedState = parseInt(jumpedPiece);
+        if (pieceState !== -jumpedState) {
+            window.alert("Invalid move: Cannot jump own piece.");
+            return false;
+        }
+        removeMiddlePiece = true;
+    }
+    if ((parseInt(board[from.x][from.y]) === board[from.x][from.y]) && (Math.sign(board[from.x][from.y]) !== Math.sign(distance.x))) {
+        window.alert("Invalid move: Wrong direction.");
+        return false;
+    }
+
+    // Perform the move and remove the jumped piece if necessary
+    if (removeMiddlePiece && game != null) {
+        game.removeMiddlePiece(jumpedPieceIndex);
+    }
+    return true;
+}
+
 
     // getTurn() {
     //     return this.turn
