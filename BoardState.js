@@ -194,10 +194,7 @@ class BoardState {
             //console.log("ILLEGAL MOVE: wrong direction");
             return false;
         }
-        if (this.turn != parseInt(this.board[from.x][from.y])) {
-            console.log("ILLEGAL TURN: wrong player")
-            return false;
-        }
+ 
 
 //         if (to.x == 0 || to.x == 7) {
 
