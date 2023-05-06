@@ -209,7 +209,25 @@ class BoardState {
     // getTurn() {
     //     return this.turn
     // }
+let currentPlayer = black; // Current player's turn
 
+// Inside your move function or event handler
+function move(from, to) {
+  if (currentPlayer === black) {
+    // Process black player's move
+    
+    // After successful move, switch turn to red player
+    currentPlayer = red;
+  } else if (currentPlayer === red) {
+    // Process red player's move
+    
+    // After successful move, switch turn to black player
+    currentPlayer = black;
+  } else {
+    // This block will execute if the currentPlayer is neither black nor red
+    window.alert('Invalid player turn. Please try again.');
+    return; // Exit the move function or event handler
+  }
  isPlayerTurn(player) {
         return this.turn === player;
     }
