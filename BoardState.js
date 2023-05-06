@@ -223,4 +223,14 @@ class BoardState {
     //     return this.turn
     // }
 
+ isPlayerTurn(player) {
+        return this.turn === player;
+    }
+
+    nextTurn() {
+        if (this.turn === red || this.turn === redKing)
+            this.turn = black;
+        else
+            this.turn = red;
+    }
 }
